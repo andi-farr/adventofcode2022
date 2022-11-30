@@ -1,0 +1,22 @@
+{
+  "name": "aoc-2022",
+  "version": "1.0.0",
+  "description": "Advent of Code 2022",
+  "main": "index.js",
+  "scripts": {
+    "go": "node -r esm "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andi-farr/adventofcode2022.git"
+  },
+  "author": "andi farr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andi-farr/adventofcode2022/issues"
+  },
+  "homepage": "https://github.com/andi-farr/adventofcode2022#readme",
+  "dependencies": {
+    "esm": "^3.2.25"
+  }
+}

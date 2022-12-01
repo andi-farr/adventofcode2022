@@ -1,7 +1,7 @@
-import { getDataToNumbers } from '../helpers';
+import { toNumbers } from '../helpers';
 
-const test = getDataToNumbers(__dirname + '/test.txt');
-const data = getDataToNumbers(__dirname + '/data.txt');
+const test = toNumbers('01', 'test');
+const data = toNumbers('01', 'data');
 
 // create an array of elves, showing total calories for each
 const toElves = arr => arr.reduce(

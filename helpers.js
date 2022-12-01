@@ -1,9 +1,12 @@
 import fs from 'fs';
 
+// basic read of file from given day number
+const readData = (day, file = 'data') => fs.readFileSync(`${__dirname}/${day}/${file}.txt`, 'utf8');
+
 // split by line, strings
-const getData = filename => fs.readFileSync(filename, 'utf8').split("\n");
+const toStrings = (day, file) => readData(day, file).split("\n");
 
 // split by line, converted to numbers, empty line returns undefined
-const getDataToNumbers = filename => getData(filename).map(curr => curr === '' ? undefined : Number(curr));
+const toNumbers = (day, file) => toStrings(day, file).map(curr => curr === '' ? undefined : Number(curr));
 
-export { getData, getDataToNumbers };
+export { readData, toStrings, toNumbers };

@@ -1,7 +1,8 @@
 import { toNumbers } from '../helpers';
 
-const test = toNumbers('01', 'test');
-const data = toNumbers('01', 'data');
+const day = '01';
+const test = toNumbers(day, 'test');
+const data = toNumbers(day, 'data');
 
 // create an array of elves, showing total calories for each
 const toElves = arr => arr.reduce(

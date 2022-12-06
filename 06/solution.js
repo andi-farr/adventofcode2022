@@ -12,7 +12,10 @@ const findMarker = (str, markerLength = 4) => {
     }
 };
 
-console.log(findMarker(test, 4));
-console.log(findMarker(data, 4));
-console.log(findMarker(test, 14));
-console.log(findMarker(data, 14));
+const findMarkerCondensed = (str, mL = 4) => 
+    str.split('').reduce((out, _, i) => (out || (new Set(str.slice(i-mL, i).split('')).size === mL ? i :  null)), null);
+
+console.log(findMarkerCondensed(test, 4));
+console.log(findMarkerCondensed(data, 4));
+console.log(findMarkerCondensed(test, 14));
+console.log(findMarkerCondensed(data, 14));

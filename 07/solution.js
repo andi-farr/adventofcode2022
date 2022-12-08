@@ -35,7 +35,7 @@ const makeFileSystem = arr => {
         // generate key
         const key = stack.slice(0, stackDepth+1).map(dir => dir.name).join('/');
         sizeCache[key] = newSize;
-    };
+    }
 
     // file system traversal
     const cd = dirName => {
@@ -98,4 +98,5 @@ const getBestDirToDelete = arr => {
     return bestDirSize;
 }
 
+console.log(getBiggestFolders(data));
 console.log(getBestDirToDelete(data));

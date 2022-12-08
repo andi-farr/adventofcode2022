@@ -9,4 +9,8 @@ const toStrings = (day, file) => readData(day, file).split("\n");
 // split by line, converted to numbers, empty line returns undefined
 const toNumbers = (day, file) => toStrings(day, file).map(curr => curr === '' ? undefined : Number(curr));
 
-export { readData, toStrings, toNumbers };
+// split into multidimensional grid, converted to numbers
+const toMultidimensionalNumeric = 
+    (day, file) => toStrings(day, file).map(row => row.split('').map(curr => Number(curr)));
+
+export { readData, toStrings, toNumbers, toMultidimensionalNumeric };

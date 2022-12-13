@@ -28,6 +28,7 @@ const solvePair = ({ l, r }, top = true) => {
             const recurse = solvePair(subArrays, false);
             // if this actually returned then we've got our answer
             if (typeof recurse === 'boolean') return recurse;
+            // because we continue if the above is unresolved, let's check to make sure r didn't have any more items
             if (subArrays.l.length < subArrays.r.length) return true;
         }
         // otherwise this is unresolved, carry on
@@ -43,6 +44,9 @@ const parseData = txt => txt.split('\n\n').map(chunk => {
 });
 
 const solveAll = txt => parseData(txt).reduce((out, pair, i) => solvePair(pair) ? out + (i+1) : out, 0);
+
+console.log(solveAll(test));
+console.log(solveAll(data));
 
 // part 2
 const dividers = ['[[2]]', '[[6]]'];

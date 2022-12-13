@@ -4,12 +4,6 @@ const day = '13';
 const test = readData(day, 'test');
 const data = readData(day, 'data');
 
-const parseData = txt => txt.split('\n\n').map(chunk => {
-    const [l, r] = chunk.split('\n');
-    return { l: JSON.parse(l), r: JSON.parse(r) };
-});
-
-// part 1
 const solvePair = ({ l, r }, top = true) => {
     // first, check for empty left array (this is a pass)
     if (!l.length && r.length) return true;
@@ -26,13 +20,15 @@ const solvePair = ({ l, r }, top = true) => {
             return false;
         } else {
             // at least one of these is an array
-            const lArr = Number.isInteger(lVal) ? [lVal] : lVal;
-            const rArr = Number.isInteger(rVal) ? [rVal] : rVal;
+            const subArrays = {
+                l: Number.isInteger(lVal) ? [lVal] : lVal,
+                r: Number.isInteger(rVal) ? [rVal] : rVal
+             }
             // then recurse through the subarrays
-            const recurse = solvePair({ l: lArr, r: rArr }, false);
+            const recurse = solvePair(subArrays, false);
             // if this actually returned then we've got our answer
             if (typeof recurse === 'boolean') return recurse;
-            if (lArr.length < rArr.length) return true;
+            if (subArrays.l.length < subArrays.r.length) return true;
         }
         // otherwise this is unresolved, carry on
         i++;
@@ -40,7 +36,26 @@ const solvePair = ({ l, r }, top = true) => {
     if (top) return true; // we ran out of items on the left
 };
 
+// part 1
+const parseData = txt => txt.split('\n\n').map(chunk => {
+    const [l, r] = chunk.split('\n');
+    return { l: JSON.parse(l), r: JSON.parse(r) };
+});
+
 const solveAll = txt => parseData(txt).reduce((out, pair, i) => solvePair(pair) ? out + (i+1) : out, 0);
 
-console.log(solveAll(test));
-console.log(solveAll(data));
+// part 2
+const dividers = ['[[2]]', '[[6]]'];
+const getPackets = txt => [...dividers, ...txt.split(`\n`).filter(row => row !== '')].map(row => JSON.parse(row));
+
+// convert the solve function into a sort function 
+const packetSort = (a, b) => solvePair({ l: a, r: b }) ? -1 : 1;
+
+const resolvePackets = txt => {
+    const sortedPackets = getPackets(txt).sort(packetSort);
+    const strPackets = sortedPackets.map(arr => JSON.stringify(arr));
+    return strPackets.reduce((out, current, i) => dividers.includes(current) ? out * (i+1) : out, 1);
+}
+
+console.log(resolvePackets(test));
+console.log(resolvePackets(data));

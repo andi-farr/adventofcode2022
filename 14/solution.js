@@ -143,3 +143,4 @@ const simulateWithFloor = (arr) => {
 }
 
 console.log(simulate(data));
+console.log(simulateWithFloor(data));

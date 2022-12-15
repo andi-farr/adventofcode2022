@@ -125,7 +125,7 @@ const dropSandUntilFull = (x, y, grid, b) => {
 
 const simulateWithFloor = (arr) => {
     let { grid, bounds } = generateMap(arr, 160); // trial and error padding, to avoid adding to the grid dynamically ;D
-    // if we have a floor, simulate that
+    // add the floor
     bounds.b += 2;
     grid = [...grid, grid[0].map(_ => null), grid[0].map(_ => '#')];
     const dropX = n(500, bounds);
